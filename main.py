@@ -1,6 +1,7 @@
 import streamlit as st
 import math
 import statistics
+import requests
 
 # Kalkulator Matematika
 
@@ -108,7 +109,9 @@ def currency_conversion():
 
 
 def get_currencies():
-    currencies = ["USD", "EUR", "GBP", "JPY", "CAD"]
+    response = requests.get("https://api.exchangerate-api.com/v4/latest/USD")
+    data = response.json()
+    currencies = list(data["rates"].keys())
     return currencies
 
 
